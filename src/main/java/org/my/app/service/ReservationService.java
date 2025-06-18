@@ -4,9 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import jakarta.ws.rs.core.Response.Status;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -38,13 +35,13 @@ public class ReservationService {
   public ReservationService()  {
     // write code to load tableConfiguration.json into a list of Table objects
     try {
-      var json = Files.readString(Paths.get(ReservationService.class.getClassLoader().getResource("tableConfiguration.json").toURI()));
-      tables = Arrays.asList(mapper.readValue(json, Table[].class));
+      var jsonInputStream = ReservationService.class.getClassLoader().getResourceAsStream("tableConfiguration.json");
+      tables = Arrays.asList(mapper.readValue(jsonInputStream, Table[].class));
       validTimeSlots.forEach( timeSlot ->{
 
       });
 
-    } catch (IOException | URISyntaxException e) {
+    } catch (IOException e) {
       log.error("Error loading table configuration", e);
       throw new RuntimeException("Failed to load table configuration", e);
     }

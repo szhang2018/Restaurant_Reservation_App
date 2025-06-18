@@ -22,6 +22,8 @@ This project is a restaurant reservation system that allows users to request boo
 This is standalone application, you can run it by command line or using your favorite IDE.
 i.e., below is the run configuration for IntelliJ IDEA:
 ![img_2.png](img_2.png)
+Or run in command line with packaged jar:
+java -jar RestaurantReservation-1.0.0-SNAPSHOT.jar
 
 ## How to Test
 1. Junit tests are provided in the `src/test/java` directory, especially for the Controller ReservationHandler
